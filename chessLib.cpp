@@ -18,3 +18,4 @@ Tas::Tas(struct position p1){
 };
 void Tas::setMove(struct position *p1){ this->move = p1; }
 struct position* Tas::getMove(){ return this->move; }
+int a;
