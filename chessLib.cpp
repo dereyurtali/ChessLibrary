@@ -25,7 +25,18 @@ Tas::Tas(struct position p1){
 
 Sah::Sah(struct position p1){
     Sah s1;
-    s1.setPos(p1); };
+    s1.setPos(p1); 
+    for (int i = 0; i < 8; i++)
+    {
+       for (int j = 0; j < 8; j++)
+       {
+           
+       }
+       
+    }
+    
+    
+    };
     
 Vezir::Vezir(struct position p1){
     Vezir v1;
