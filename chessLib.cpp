@@ -2,7 +2,7 @@
 #include "chessLib.h"
 
 using namespace std;
-
+int i;
 Tas **board = (Tas **)calloc(8, sizeof(Tas *));
     for (i = 0; i < 8; i++) {
         board[i] = (Tas *)calloc(8, sizeof(Tas));
@@ -12,6 +12,12 @@ struct position
 {
     char dusey;
     short yatay;
+};
+
+void arrayToChess(int i, int j, struct position pos){ //satir 8 - i
+    i = 8 - pos.yatay;
+    j = 'a' + pos.dusey;
+    cout << "Giris: " << pos.dusey << pos.yatay << "\tCikis: " << i << "-" << j << endl;
 };
 
 
@@ -24,13 +30,14 @@ Tas::Tas(struct position p1){
     t1.setPos(p1); };
 
 Sah::Sah(struct position p1){
+    int i,j;
     Sah s1;
     s1.setPos(p1); 
-    for (int i = 0; i < 8; i++)
+    for (i = 0; i < 8; i++)
     {
-       for (int j = 0; j < 8; j++)
+       for (j = 0; j < 8; j++)
        {
-           
+           board[i][j];
        }
        
     }

@@ -83,3 +83,4 @@ public:
     void printPiece(void);
 };
 
+void arrayToChess(int, int, struct position);
