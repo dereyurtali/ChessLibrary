@@ -82,3 +82,4 @@ public:
     ~Piyon();
     void printPiece(void);
 };
+
