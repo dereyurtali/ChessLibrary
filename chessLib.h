@@ -65,7 +65,6 @@ public:
 
 
 class Kale : Tas
-int a;
 {
 public:
     Kale();
