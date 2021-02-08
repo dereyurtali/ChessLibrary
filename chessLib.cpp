@@ -123,7 +123,12 @@ void Vezir::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- VEZIR -----------------
 
+
+
+
+// --------------- FIL -----------------
 struct position *updateFilMove(struct position p1)
 {
     int i, j = 0, k = 0;
@@ -151,7 +156,6 @@ struct position *updateFilMove(struct position p1)
         }
     }
 }
-
 // Fil Class'ı
 Fil::Fil(struct position p1)
 {
@@ -166,7 +170,12 @@ void Fil::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- FIL -----------------
 
+
+
+
+// --------------- AT -----------------
 struct position *updateAtMove(struct position p1)
 {
     int i, j, k = 0, l = 0, m = 0;
@@ -194,7 +203,6 @@ struct position *updateAtMove(struct position p1)
         }
     }
 }
-
 // At Class'ı
 At::At(struct position p1)
 {
@@ -208,7 +216,13 @@ void At::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- AT -----------------
 
+
+
+
+
+// --------------- KALE -----------------
 struct position *updateKaleMove(struct position p1)
 {
     int i, j, k = 0;
@@ -230,7 +244,6 @@ struct position *updateKaleMove(struct position p1)
         }
     }
 }
-
 // Kale Class'ı
 Kale::Kale(struct position p1)
 {
@@ -244,7 +257,13 @@ void Kale::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- KALE -----------------
 
+
+
+
+
+// --------------- PIYON -----------------
 struct position *updatePiyonMove(struct position p1)
 {
     int i;
@@ -270,7 +289,6 @@ struct position *updatePiyonMove(struct position p1)
         possiblePositions = foo;
     }
 }
-
 // Piyon Class'ı
 Piyon::Piyon(struct position p1)
 {
@@ -284,6 +302,10 @@ void Piyon::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- PIYON -----------------
+
+
+
 
 void movePiece(Tas *t, struct position newPos)
 {
