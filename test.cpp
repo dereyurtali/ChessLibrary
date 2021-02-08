@@ -9,5 +9,6 @@ int main(){
     positionOne.dusey = 'd';
     Piyon piyon1(positionOne);
     Kale kale1(positionOne);
+    At at1(positionOne);
     return 0;
 }

@@ -2,20 +2,6 @@
 #include "chessLib.hpp"
 
 using namespace std;
-/*
-void arrayToChess(int i, int j, struct position pos)
-{ //satir 8 - i
-    i = 8 - pos.yatay;
-    j = 'a' + pos.dusey;
-    cout << "Giris: " << pos.dusey << pos.yatay << "\tCikis: " << i << "-" << j << endl;
-};
-*/
-/*
-Tas **board = (Tas **)malloc(8 * sizeof(Tas *));
-for (int i = 0; i < 8; i++) {
-    board[i] = (Tas *)malloc(8 * sizeof(Tas));
-}
-*/
 
 void Tas::setPos(struct position p1) { this->pos = p1; }
 struct position Tas::getPos() { return this->pos; }
@@ -25,33 +11,144 @@ Tas::Tas(struct position p1)
 {
     this->setPos(p1);
 };
-/*
+
+// Sah Class'ı
 Sah::Sah(struct position p1)
 {
+    int i, j, k = 0;
     this->setPos(p1);
-    
+
+    struct position *possiblePositions = (struct position *)calloc(8, sizeof(struct position));
+    struct position newPos;
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (!((j == 1) && (i == 1)))
+            {
+                newPos.yatay = p1.yatay + (i - 1);
+                newPos.dusey = p1.dusey + (j - 1);
+                possiblePositions[k++] = newPos;
+            }
+        }
+    }
+    this->setMove(possiblePositions);
 };
 
+// Vezir Class'ı
 Vezir::Vezir(struct position p1)
 {
+    int i, j, k = 0;
     this->setPos(p1);
 
+    struct position *possiblePositions = (struct position *)calloc(27, sizeof(struct position));
+    struct position newPos;
+    // plus code.
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            if (p1.yatay == (j + 1) || p1.dusey == (i + 'a'))
+            {
+                newPos.yatay = (j + 1);
+                newPos.dusey = i + 'a';
+                if (!((p1.dusey == newPos.dusey) && (p1.yatay == newPos.yatay)))
+                { // it was showing the p1 position as possible position before this if.
+                    possiblePositions[k++] = newPos;
+                }
+            }
+        }
+    }
+    j = 0;
+    // cross code.
+    for (i = 0; i < 8; i++)
+    {
+        newPos.dusey = i + 'a';
+        j = newPos.dusey - p1.dusey;
+        newPos.yatay = p1.yatay + j;
+        if (newPos.yatay > 0)
+        {
+            if (p1.dusey != newPos.dusey && p1.yatay != newPos.yatay)
+            {
+                possiblePositions[k++] = newPos;
+            }
+        }
+        newPos.yatay = p1.yatay - j;
+        if (newPos.yatay > 0)
+        {
+            if (p1.dusey != newPos.dusey && p1.yatay != newPos.yatay)
+            {
+                possiblePositions[k++] = newPos;
+            }
+        }
+    }
+    this->setMove(possiblePositions);
 };
 
+// Fil Class'ı
 Fil::Fil(struct position p1)
 {
+    int i, j = 0, k = 0;
     this->setPos(p1);
-   
+
+    struct position *possiblePositions = (struct position *)calloc(16, sizeof(struct position));
+    struct position newPos;
+    for (i = 0; i < 8; i++)
+    {
+        newPos.dusey = i + 'a';
+        k = newPos.dusey - p1.dusey;
+        newPos.yatay = p1.yatay + k;
+        if (newPos.yatay > 0)
+        {
+            if (!(newPos.dusey == 'e' && newPos.yatay == 4))
+            {
+                possiblePositions[j++] = newPos;
+            }
+        }
+        newPos.yatay = p1.yatay - k;
+        if (newPos.yatay > 0)
+        {
+            if (!(newPos.dusey == 'e' && newPos.yatay == 4))
+            {
+                possiblePositions[j++] = newPos;
+            }
+        }
+    }
+    this->setMove(possiblePositions);
 };
 
+// At Class'ı
 At::At(struct position p1)
 {
-   this->setPos(p1);
-  
+    int i, j, k = 0, l = 0, m = 0;
+    this->setPos(p1);
+    struct position *possiblePositions;
+    struct position newPos;
+    possiblePositions = (struct position *)calloc(8, sizeof(struct position));
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            k = (j + 'a') - p1.dusey;     // k -> yatay farki
+            l = (8 - (i + 1)) - p1.yatay; // l -> dusey farki
+            if ((k == 1 || k == -1) && (l == 2 || l == -2))
+            { // yataydaki fark 1 ise ve duseydeki fark 2 ise
+                newPos.yatay = i + 1;
+                newPos.dusey = j + 'a';
+                possiblePositions[m++] = newPos;
+            }
+            if ((k == 2 || k == -2) && (l == 1 || l == -1))
+            { // yataydaki fark 2 ise ve duseydeki fark 1 ise
+                newPos.yatay = i + 1;
+                newPos.dusey = j + 'a';
+                possiblePositions[m++] = newPos;
+            }
+        }
+    }
+    this->setMove(possiblePositions);
 };
 
-*/
-
+// Kale Class'ı
 Kale::Kale(struct position p1)
 {
     int i, j, k = 0;
@@ -77,6 +174,7 @@ Kale::Kale(struct position p1)
     this->setMove(possiblePositions);
 };
 
+// Piyon Class'ı
 Piyon::Piyon(struct position p1)
 {
     int i;
@@ -105,24 +203,3 @@ Piyon::Piyon(struct position p1)
     }
     this->setMove(possiblePositions);
 };
-
-/*
-void Sah::printPiece()
-{
-    struct position *foo = this->getMove();
-    int i;
-    cout << "Type: Sah\n"
-         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl;
-    cout << "\n"
-         << "Possible Moves: ";
-    for (struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-
-
-void movePiece(Sah *s1, struct position newP)
-{
-    s1->setPos(&newP);
-}
-*/

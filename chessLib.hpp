@@ -7,7 +7,7 @@ struct position
     char dusey;
     short yatay;
 };
-//-----------
+
 class Tas
 {
 private:
@@ -23,9 +23,7 @@ public:
     void setMove(struct position *);
     struct position *getMove();
 };
-//-----------
 
-/*
 
 class Sah : Tas
 {
@@ -46,7 +44,6 @@ public:
     void printPiece(void);
 };
 
-
 class Fil : Tas
 {
 public:
@@ -56,7 +53,6 @@ public:
     void printPiece(void);
 };
 
-
 class At : Tas
 {
 public:
@@ -65,7 +61,6 @@ public:
     ~At(){};
     void printPiece(void);
 };
-*/
 
 class Kale : Tas
 {
@@ -76,7 +71,6 @@ public:
     void printPiece(void);
 };
 
-
 class Piyon : public Tas
 {
 public:
@@ -86,23 +80,3 @@ public:
     void printPiece(void);
 };
 
-/*
-void arrayToChess(int, int, struct position);
-
-
-
-void movePiece(Sah *, struct pozisyon);
-void movePiece(Vezir *, struct pozisyon);
-void movePiece(Fil *, struct pozisyon);
-void movePiece(At *, struct pozisyon);
-void movePiece(Kale *, struct pozisyon);
-void movePiece(Piyon *, struct pozisyon);
-
-
-struct position *calculateSah(struct position);
-struct position *calculateVezir(struct position);
-struct position *calculateFil(struct position);
-struct position *calculateAt(struct position);
-struct position *calculateKale(struct position);
-struct position *calculatePiyon(struct position);
-*/

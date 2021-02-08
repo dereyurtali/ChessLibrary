@@ -67,18 +67,66 @@ struct position *hareketKale(struct position p1){
     // this func. return an array of possible positions.
     int i, j, k=0;
     struct position *possiblePositions = (struct position *)calloc(14, sizeof(struct position));
-    struct position newPos;
+    struct position newPosPosPosPos;
     for (i = 0; i < 8; i++) {
         for (j = 0; j < 8; j++) {
             if (p1.yatay == (j+1) || p1.dusey == (i+'a')) {
-                newPos.yatay = (j+1);
-                newPos.dusey = i+'a';
-                if (!(newPos.dusey == 'e' && newPos.yatay == 4)) {
-                    possiblePositions[k++] = newPos;
+                newPosPosPosPos.yatay = (j+1);
+                newPosPosPosPos.dusey = i+'a';
+                if (!(newPosPosPosPos.dusey == 'e' && newPosPosPosPos.yatay == 4)) {
+                    possiblePositions[k++] = newPosPosPosPos;
                 }
             }
         }
     }
+    return possiblePositions;
+}
+
+struct position *hareketAt(struct position p1){
+    int i, j, k = 0, l = 0, m = 0;
+    struct position *possiblePositions;
+    struct position newPosPosPos;
+    possiblePositions = (struct position *)calloc(8, sizeof(struct position));
+    for (i = 0; i < 8; i++) {
+        for (j = 0; j < 8; j++) {
+            k = (j+'a') - p1.dusey; // k -> yatay farki
+            l = (8-(i+1)) - p1.yatay; // l -> dusey farki
+            if ((k == 1 || k == -1) && (l == 2 || l == -2)) { // yataydaki fark 1 ise ve duseydeki fark 2 ise
+                newPosPosPos.yatay = i+1;
+                newPosPosPos.dusey = j+'a';
+                possiblePositions[m++] = newPosPosPos;
+            }
+            if ((k == 2 || k == -2) && (l == 1 || l == -1)) { // yataydaki fark 2 ise ve duseydeki fark 1 ise
+                newPosPosPos.yatay = i+1;
+                newPosPosPos.dusey = j+'a';
+                possiblePositions[m++] = newPosPosPos;
+            }
+        }
+    }
+    return possiblePositions;
+}
+struct position *hareketFil(struct position p1){
+    // this func. return an array of possible positions.
+    int i, j = 0, k=0;
+    struct position *possiblePositions = (struct position *)calloc(16, sizeof(struct position));
+    struct position newPosPos;
+    for (i = 0; i < 8; i++) {
+        newPosPos.dusey = i+'a';
+        k = newPosPos.dusey - p1.dusey;
+        newPosPos.yatay = p1.yatay + k;
+        if (newPosPos.yatay > 0){
+            if (!(newPosPos.dusey == 'e' && newPosPos.yatay == 4)) {
+                possiblePositions[j++] = newPosPos;
+            }
+        }
+        newPosPos.yatay = p1.yatay - k;
+        if (newPosPos.yatay > 0){
+            if (!(newPosPos.dusey == 'e' && newPosPos.yatay == 4)) {
+                possiblePositions[j++] = newPosPos;
+            }
+        }
+    }
+    // this func. made with kan, ter, gozyasi.
     return possiblePositions;
 }
 
@@ -95,20 +143,20 @@ Piyon::Piyon(struct position p1)
     piyon1.setPos(p1);
 
     struct position *possiblePositions;
-    struct position newPosPos;
+    struct position newPosPosPosPosPos;
     if(p1.yatay == 2){
         struct position *foo = (struct position *)calloc(2, sizeof(struct position));
         for (i = 0; i < 2; i++) {
-            newPosPos.yatay = p1.yatay + (i+1);
-            newPosPos.dusey = p1.dusey;
-            foo[i] = newPosPos;
+            newPosPosPosPosPos.yatay = p1.yatay + (i+1);
+            newPosPosPosPosPos.dusey = p1.dusey;
+            foo[i] = newPosPosPosPosPos;
         }
         possiblePositions = foo;
     }else{
             struct position *foo = (struct position *)calloc(1, sizeof(struct position));
-            newPosPos.yatay = p1.yatay + 1;
-            newPosPos.dusey = p1.dusey;
-            foo[0] = newPosPos;
+            newPosPosPosPosPos.yatay = p1.yatay + 1;
+            newPosPosPosPosPos.dusey = p1.dusey;
+            foo[0] = newPosPosPosPosPos;
             possiblePositions = foo;
     }
     piyon1.setMove(possiblePositions);
@@ -119,20 +167,20 @@ Piyon::Piyon(struct position p1)
 struct position *hareketPiyon(struct position p1){
     int i;
     struct position *possiblePositions;
-    struct position newPosPos;
+    struct position newPosPosPosPosPos;
     if(p1.yatay == 2){
         struct position *foo = (struct position *)calloc(2, sizeof(struct position));
         for (i = 0; i < 2; i++) {
-            newPosPos.yatay = p1.yatay + (i+1);
-            newPosPos.dusey = p1.dusey;
-            foo[i] = newPosPos;
+            newPosPosPosPosPos.yatay = p1.yatay + (i+1);
+            newPosPosPosPosPos.dusey = p1.dusey;
+            foo[i] = newPosPosPosPosPos;
         }
         possiblePositions = foo;
     }else{
             struct position *foo = (struct position *)calloc(1, sizeof(struct position));
-            newPosPos.yatay = p1.yatay + 1;
-            newPosPos.dusey = p1.dusey;
-            foo[0] = newPosPos;
+            newPosPosPosPosPos.yatay = p1.yatay + 1;
+            newPosPosPosPosPos.dusey = p1.dusey;
+            foo[0] = newPosPosPosPosPos;
             possiblePositions = foo;
     }
     return possiblePositions;
@@ -173,8 +221,14 @@ void Sah::printPiece()
 }
 
 /*
-void movePiece(Sah *s1, struct position newPosP)
+void movePiece(Sah *s1, struct position newPosPosPosPosP)
 {
-    s1->setPos(&newPosP);
+    s1->setPos(&newPosPosPosPosP);
 }
 */
+
+struct position *hareketVezir(struct position p1){
+    // this func. return an array of possible positions.
+
+    return possiblePositions;
+}
