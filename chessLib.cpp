@@ -196,7 +196,56 @@ Piyon::Piyon(struct position p1)
 };
 
 void Sah::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
     cout << "Type: Sah\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
     cout << "\n" << "Possible Moves: ";
-    
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Vezir::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
+    cout << "Type: Vezir\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
+    cout << "\n" << "Possible Moves: ";
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Fil::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
+    cout << "Type: Fil\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
+    cout << "\n" << "Possible Moves: ";
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void At::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
+    cout << "Type: At\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
+    cout << "\n" << "Possible Moves: ";
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Kale::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
+    cout << "Type: Kale\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
+    cout << "\n" << "Possible Moves: ";
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Piyon::printPiece(){
+    struct Poz *foo = this -> getMove();
+    int i;
+    cout << "Type: Piyon\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
+    cout << "\n" << "Possible Moves: ";
+    for(const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
 }
