@@ -1,13 +1,13 @@
 #include <iostream>
-#include "chessLib.h"
+#include "chessLib.hpp"
 
 using namespace std;
 
 int main(){
-    
-    struct position pos;
-    pos.yatay = 4;
-    pos.dusey = 'd';
-    arrayToChess(0,5, pos);
+    struct position positionOne;
+    positionOne.yatay = 4;
+    positionOne.dusey = 'd';
+    Piyon piyon1(positionOne);
+    Kale kale1(positionOne);
     return 0;
 }

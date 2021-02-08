@@ -1,12 +1,13 @@
 #include <iostream>
 
-#define CHESSLIB_H_
+#define CHESSLIB_HPP_
 
 struct position
 {
     char dusey;
     short yatay;
 };
+//-----------
 class Tas
 {
 private:
@@ -14,22 +15,24 @@ private:
     struct position *move;
 
 public:
-    Tas();
+    Tas(){};
     Tas(struct position);
-    ~Tas();
+    ~Tas(){};
     void setPos(struct position);
     struct position getPos();
     void setMove(struct position *);
     struct position *getMove();
 };
+//-----------
 
+/*
 
 class Sah : Tas
 {
 public:
-    Sah();
+    Sah(){};
     Sah(struct position);
-    ~Sah();
+    ~Sah(){};
     void printPiece(void);
 };
 
@@ -37,9 +40,9 @@ public:
 class Vezir : Tas
 {
 public:
-    Vezir();
+    Vezir(){};
     Vezir(struct position);
-    ~Vezir();
+    ~Vezir(){};
     void printPiece(void);
 };
 
@@ -47,9 +50,9 @@ public:
 class Fil : Tas
 {
 public:
-    Fil();
+    Fil(){};
     Fil(struct position);
-    ~Fil();
+    ~Fil(){};
     void printPiece(void);
 };
 
@@ -57,38 +60,36 @@ public:
 class At : Tas
 {
 public:
-    At();
+    At(){};
     At(struct position);
-    ~At();
+    ~At(){};
     void printPiece(void);
 };
-
+*/
 
 class Kale : Tas
 {
 public:
-    Kale();
+    Kale(){};
     Kale(struct position);
-    ~Kale();
+    ~Kale(){};
     void printPiece(void);
 };
 
 
-class Piyon : Tas
+class Piyon : public Tas
 {
 public:
-    Piyon();
+    Piyon(){};
     Piyon(struct position);
-    ~Piyon();
+    ~Piyon(){};
     void printPiece(void);
 };
 
+/*
 void arrayToChess(int, int, struct position);
 
-Tas **board = (Tas **)malloc(8* sizeof(Tas *));
-for(int i = 0; i < 8; i++) {
-    board[i] = (Tas *)malloc(8* sizeof(Tas));
-}
+
 
 void movePiece(Sah *, struct pozisyon);
 void movePiece(Vezir *, struct pozisyon);
@@ -97,9 +98,11 @@ void movePiece(At *, struct pozisyon);
 void movePiece(Kale *, struct pozisyon);
 void movePiece(Piyon *, struct pozisyon);
 
+
 struct position *calculateSah(struct position);
 struct position *calculateVezir(struct position);
 struct position *calculateFil(struct position);
 struct position *calculateAt(struct position);
 struct position *calculateKale(struct position);
 struct position *calculatePiyon(struct position);
+*/
