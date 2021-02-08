@@ -11,6 +11,11 @@ struct position
 };
 
 struct position *updateSahMove(struct position);
+struct position *updateVezirMove(struct position);
+struct position *updateFilMove(struct position);
+struct position *updateAtMove(struct position);
+struct position *updateKaleMove(struct position);
+struct position *updatePiyonMove(struct position);
 
 
 class Tas

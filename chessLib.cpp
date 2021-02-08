@@ -24,6 +24,9 @@ Tas::Tas(struct position p1)
     this->setPos(p1);
 };
 
+
+
+// --------------- SAH -----------------
 struct position *updateSahMove(struct position p1)
 {
     int i, j, k = 0;
@@ -56,14 +59,15 @@ void Sah::printPiece()
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
+// --------------- SAH -----------------
 
 
-// Vezir Class'ı
-Vezir::Vezir(struct position p1)
+
+
+// --------------- VEZIR -----------------
+struct position *updateVezirMove(struct position p1)
 {
     int i, j, k = 0;
-    this->setPos(p1);
-
     struct position *possiblePositions = (struct position *)calloc(27, sizeof(struct position));
     struct position newPos;
     // plus code.
@@ -105,7 +109,12 @@ Vezir::Vezir(struct position p1)
             }
         }
     }
-    this->setMove(possiblePositions);
+}
+// Vezir Class'ı
+Vezir::Vezir(struct position p1)
+{
+    this->setPos(p1);
+    this->setMove(updateVezirMove(p1));
 };
 void Vezir::printPiece()
 {
@@ -115,12 +124,9 @@ void Vezir::printPiece()
     printPosArray(this->getMove());
 }
 
-// Fil Class'ı
-Fil::Fil(struct position p1)
+struct position *updateFilMove(struct position p1)
 {
     int i, j = 0, k = 0;
-    this->setPos(p1);
-
     struct position *possiblePositions = (struct position *)calloc(16, sizeof(struct position));
     struct position newPos;
     for (i = 0; i < 8; i++)
@@ -144,7 +150,14 @@ Fil::Fil(struct position p1)
             }
         }
     }
-    this->setMove(possiblePositions);
+}
+
+// Fil Class'ı
+Fil::Fil(struct position p1)
+{
+
+    this->setPos(p1);
+    this->setMove(updateFilMove(p1));
 };
 void Fil::printPiece()
 {
@@ -154,11 +167,9 @@ void Fil::printPiece()
     printPosArray(this->getMove());
 }
 
-// At Class'ı
-At::At(struct position p1)
+struct position *updateAtMove(struct position p1)
 {
     int i, j, k = 0, l = 0, m = 0;
-    this->setPos(p1);
     struct position *possiblePositions;
     struct position newPos;
     possiblePositions = (struct position *)calloc(8, sizeof(struct position));
@@ -182,7 +193,13 @@ At::At(struct position p1)
             }
         }
     }
-    this->setMove(possiblePositions);
+}
+
+// At Class'ı
+At::At(struct position p1)
+{
+    this->setPos(p1);
+    this->setMove(updateAtMove(p1));
 };
 void At::printPiece()
 {
@@ -192,12 +209,9 @@ void At::printPiece()
     printPosArray(this->getMove());
 }
 
-// Kale Class'ı
-Kale::Kale(struct position p1)
+struct position *updateKaleMove(struct position p1)
 {
     int i, j, k = 0;
-    this->setPos(p1);
-
     struct position *possiblePositions = (struct position *)calloc(14, sizeof(struct position));
     struct position newPos;
     for (i = 0; i < 8; i++)
@@ -215,7 +229,13 @@ Kale::Kale(struct position p1)
             }
         }
     }
-    this->setMove(possiblePositions);
+}
+
+// Kale Class'ı
+Kale::Kale(struct position p1)
+{
+    this->setPos(p1);
+    this->setMove(updateKaleMove(p1));
 };
 void Kale::printPiece()
 {
@@ -225,12 +245,9 @@ void Kale::printPiece()
     printPosArray(this->getMove());
 }
 
-// Piyon Class'ı
-Piyon::Piyon(struct position p1)
+struct position *updatePiyonMove(struct position p1)
 {
     int i;
-    this->setPos(p1);
-
     struct position *possiblePositions;
     struct position newPos;
     if (p1.yatay == 2)
@@ -252,7 +269,13 @@ Piyon::Piyon(struct position p1)
         foo[0] = newPos;
         possiblePositions = foo;
     }
-    this->setMove(possiblePositions);
+}
+
+// Piyon Class'ı
+Piyon::Piyon(struct position p1)
+{
+    this->setPos(p1);
+    this->setMove(updatePiyonMove(p1));
 };
 void Piyon::printPiece()
 {
@@ -278,7 +301,7 @@ void movePiece(Tas *t, struct position newPos)
     if (b)
     { //tasi
         t->setPos(newPos);
-        
+        free(t->getMove());
         updateSahMove(newPos);
     }
     else
