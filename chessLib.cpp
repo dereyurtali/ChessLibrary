@@ -21,18 +21,21 @@ Tas::Tas(struct position p1)
     t1.setPos(p1);
 };
 
-Sah::Sah(struct position p1)
+Sah::Sah(struct position old)
 {
     Sah s1;
     s1.setPos(p1);
-    int i, j, k=0;
-    struct Poz *possiblePositions = (struct Poz *)calloc(8, sizeof(struct Poz));
-    struct Poz new;
-    for (i = 0; i < 3; i++) {
-        for (j = 0; j < 3; j++) {
-            if( !((j==1) && (i==1)) ){
-                new.yatay = old.yatay+(i-1);
-                new.dusey = old.dusey+(j-1);
+    int i, j, k = 0;
+    struct position *possiblePositions = (struct position *)calloc(8, sizeof(struct position));
+    struct position new;
+    for (i = 0; i < 3; i++)
+    {
+        for (j = 0; j < 3; j++)
+        {
+            if (!((j == 1) && (i == 1)))
+            {
+                new.yatay = old.yatay + (i - 1);
+                new.dusey = old.dusey + (j - 1);
                 possiblePositions[k++] = new;
             }
         }
@@ -40,38 +43,48 @@ Sah::Sah(struct position p1)
     s1.setMove(possiblePositions);
 };
 
-Vezir::Vezir(struct position p1)
+Vezir::Vezir(struct position old)
 {
     Vezir v1;
     v1.setPos(p1);
-    int i, j, k=0;
-    struct Poz *possiblePositions = (struct Poz *)calloc(27, sizeof(struct Poz));
-    struct Poz new;
+    int i, j, k = 0;
+    struct position *possiblePositions = (struct position *)calloc(27, sizeof(struct position));
+    struct position new;
     // plus code.
-    for (i = 0; i < 8; i++) {
-        for (j = 0; j < 8; j++) {
-            if (old.yatay == (j+1) || old.dusey == (i+'a')) {
-                new.yatay = (j+1);
-                new.dusey = i+'a';
-                if(!((old.dusey == new.dusey) && (old.yatay == new.yatay))){ // it was showing the old position as possible position before this if.
+    for (i = 0; i < 8; i++)
+    {
+        for (j = 0; j < 8; j++)
+        {
+            if (old.yatay == (j + 1) || old.dusey == (i + 'a'))
+            {
+                new.yatay = (j + 1);
+                new.dusey = i + 'a';
+                if (!((old.dusey == new.dusey) && (old.yatay == new.yatay)))
+                { // it was showing the old position as possible position before this if.
                     possiblePositions[k++] = new;
                 }
             }
         }
-    }j = 0;
+    }
+    j = 0;
     // cross code.
-    for (i = 0; i < 8; i++) {
-        new.dusey = i+'a';
+    for (i = 0; i < 8; i++)
+    {
+        new.dusey = i + 'a';
         j = new.dusey - old.dusey;
         new.yatay = old.yatay + j;
-        if (new.yatay > 0){
-            if(old.dusey != new.dusey && old.yatay != new.yatay){
+        if (new.yatay > 0)
+        {
+            if (old.dusey != new.dusey && old.yatay != new.yatay)
+            {
                 possiblePositions[k++] = new;
             }
         }
         new.yatay = old.yatay - j;
-        if (new.yatay > 0){
-            if(old.dusey != new.dusey && old.yatay != new.yatay){
+        if (new.yatay > 0)
+        {
+            if (old.dusey != new.dusey && old.yatay != new.yatay)
+            {
                 possiblePositions[k++] = new;
             }
         }
@@ -79,13 +92,13 @@ Vezir::Vezir(struct position p1)
     v1.setMove(possiblePositions);
 };
 
-Fil::Fil(struct position p1)
+Fil::Fil(struct position old)
 {
     Fil f1;
     f1.setPos(p1);
     int i, j = 0, k = 0;
-    struct Poz *possiblePositions = (struct Poz *)calloc(16, sizeof(struct Poz));
-    struct Poz new;
+    struct position *possiblePositions = (struct position *)calloc(16, sizeof(struct position));
+    struct position new;
     for (i = 0; i < 8; i++)
     {
         new.dusey = i + 'a';
@@ -110,14 +123,14 @@ Fil::Fil(struct position p1)
     f1.setMove(possiblePositions);
 };
 
-At::At(struct position p1)
+At::At(struct position old)
 {
     At a1;
     a1.setPos(p1);
     int i, j, k = 0, l = 0, m = 0;
-    struct Poz *possiblePositions;
-    struct Poz new;
-    possiblePositions = (struct Poz *)calloc(8, sizeof(struct Poz));
+    struct position *possiblePositions;
+    struct position new;
+    possiblePositions = (struct position *)calloc(8, sizeof(struct position));
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -141,13 +154,13 @@ At::At(struct position p1)
     a1.setMove(possiblePositions);
 };
 
-Kale::Kale(struct position p1)
+Kale::Kale(struct position old)
 {
     Kale k1;
     k1.setPos(p1);
     int i, j, k = 0;
-    struct Poz *possiblePositions = (struct Poz *)calloc(14, sizeof(struct Poz));
-    struct Poz new;
+    struct position *possiblePositions = (struct position *)calloc(14, sizeof(struct position));
+    struct position new;
     for (i = 0; i < 8; i++)
     {
         for (j = 0; j < 8; j++)
@@ -170,11 +183,93 @@ Piyon::Piyon(struct position p1)
 {
     Piyon piyon1;
     piyon1.setPos(p1);
-    struct Poz *possiblePositions;
-    struct Poz new;
+};
+
+void Sah::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: Sah\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Vezir::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: Vezir\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Fil::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: Fil\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void At::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: At\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Kale::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: Kale\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+void Piyon::printPiece()
+{
+    struct position *foo = this->getMove();
+    int i;
+    cout << "Type: Piyon\n"
+         << "Current Pos: " << this->pos.dusey << this->pos.yatay << endl;
+    cout << "\n"
+         << "Possible Moves: ";
+    for (const struct position &poses : foo)
+        cout << poses.dusey << poses.yatay << " ";
+    cout << endl;
+}
+
+void movePiece(Sah *s1, struct positionisyon newP)
+{
+    s1->setPos(newP);
+}
+
+struct position *updatePiyon(struct position old, Piyon *p)
+{
+    struct position *possiblePositions;
+    struct position new;
     if (old.yatay == 2)
     {
-        struct Poz *foo = (struct Poz *)calloc(2, sizeof(struct Poz));
+        struct position *foo = (struct position *)calloc(2, sizeof(struct position));
         for (int i = 0; i < 2; i++)
         {
             new.yatay = old.yatay + (i + 1);
@@ -185,7 +280,7 @@ Piyon::Piyon(struct position p1)
     }
     else
     {
-        struct Poz *foo = (struct Poz *)calloc(1, sizeof(struct Poz));
+        struct position *foo = (struct position *)calloc(1, sizeof(struct position));
         new.yatay = old.yatay + 1;
         new.dusey = old.dusey;
         foo[0] = new;
@@ -193,59 +288,4 @@ Piyon::Piyon(struct position p1)
     }
     possiblePositions;
     piyon1.setMove(possiblePositions);
-};
-
-void Sah::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: Sah\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-void Vezir::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: Vezir\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-void Fil::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: Fil\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-void At::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: At\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-void Kale::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: Kale\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
-}
-void Piyon::printPiece(){
-    struct Poz *foo = this -> getMove();
-    int i;
-    cout << "Type: Piyon\n" << "Current Pos: " << this -> pos.dusey << this -> pos.yatay << endl;
-    cout << "\n" << "Possible Moves: ";
-    for(const struct position &poses : foo)
-        cout << poses.dusey << poses.yatay << " ";
-    cout << endl;
 }
