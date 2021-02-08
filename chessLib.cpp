@@ -3,6 +3,18 @@
 
 using namespace std;
 
+void printPosArray(struct position *p1)
+{
+    int i = 0;
+    while ((*(p1 + i)).dusey != NULL)
+    {
+        cout << (*(p1 + i)).dusey << (*(p1 + i)).yatay << " ";
+        i++;
+    }
+    cout << endl;
+}
+
+// Tas Class'ı
 void Tas::setPos(struct position p1) { this->pos = p1; }
 struct position Tas::getPos() { return this->pos; }
 void Tas::setMove(struct position *p1) { this->move = p1; }
@@ -12,12 +24,9 @@ Tas::Tas(struct position p1)
     this->setPos(p1);
 };
 
-// Sah Class'ı
-Sah::Sah(struct position p1)
+struct position *updateSahMove(struct position p1)
 {
     int i, j, k = 0;
-    this->setPos(p1);
-
     struct position *possiblePositions = (struct position *)calloc(8, sizeof(struct position));
     struct position newPos;
     for (i = 0; i < 3; i++)
@@ -32,8 +41,22 @@ Sah::Sah(struct position p1)
             }
         }
     }
-    this->setMove(possiblePositions);
+    return possiblePositions;
+}
+// Sah Class'ı
+Sah::Sah(struct position p1)
+{
+    this->setPos(p1);
+    this->setMove(updateSahMove(p1));
 };
+void Sah::printPiece()
+{
+    cout << "Type: Sah" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
+
 
 // Vezir Class'ı
 Vezir::Vezir(struct position p1)
@@ -84,6 +107,13 @@ Vezir::Vezir(struct position p1)
     }
     this->setMove(possiblePositions);
 };
+void Vezir::printPiece()
+{
+    cout << "Type: Vezir" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
 
 // Fil Class'ı
 Fil::Fil(struct position p1)
@@ -116,6 +146,13 @@ Fil::Fil(struct position p1)
     }
     this->setMove(possiblePositions);
 };
+void Fil::printPiece()
+{
+    cout << "Type: Fil" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
 
 // At Class'ı
 At::At(struct position p1)
@@ -147,6 +184,13 @@ At::At(struct position p1)
     }
     this->setMove(possiblePositions);
 };
+void At::printPiece()
+{
+    cout << "Type: At" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
 
 // Kale Class'ı
 Kale::Kale(struct position p1)
@@ -173,6 +217,13 @@ Kale::Kale(struct position p1)
     }
     this->setMove(possiblePositions);
 };
+void Kale::printPiece()
+{
+    cout << "Type: Kale" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
 
 // Piyon Class'ı
 Piyon::Piyon(struct position p1)
@@ -203,3 +254,35 @@ Piyon::Piyon(struct position p1)
     }
     this->setMove(possiblePositions);
 };
+void Piyon::printPiece()
+{
+    cout << "Type: Piyon" << endl
+         << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
+         << "Possible Moves: ";
+    printPosArray(this->getMove());
+}
+
+void movePiece(Tas *t, struct position newPos)
+{
+    struct position *possibleMoves = t->getMove();
+    int i = 0;
+    bool b = false;
+    while ((*(possibleMoves + i)).dusey != NULL)
+    {
+        if (newPos.dusey == (*(possibleMoves + i)).dusey && newPos.yatay == (*(possibleMoves + i)).yatay)
+        {
+            b = true;
+        }
+        i++;
+    }
+    if (b)
+    { //tasi
+        t->setPos(newPos);
+        
+        updateSahMove(newPos);
+    }
+    else
+    {
+        cout << "Error:Move is not suitable!" << endl;
+    }
+}

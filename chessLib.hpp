@@ -2,11 +2,16 @@
 
 #define CHESSLIB_HPP_
 
+void printPosArray(struct position *);
+
 struct position
 {
     char dusey;
     short yatay;
 };
+
+struct position *updateSahMove(struct position);
+
 
 class Tas
 {
@@ -22,20 +27,23 @@ public:
     struct position getPos();
     void setMove(struct position *);
     struct position *getMove();
+    friend void movePiece(Tas *, struct position);
 };
 
 
-class Sah : Tas
+class Sah : public Tas
 {
 public:
     Sah(){};
     Sah(struct position);
     ~Sah(){};
     void printPiece(void);
+    
+
 };
 
 
-class Vezir : Tas
+class Vezir : public Tas
 {
 public:
     Vezir(){};
@@ -44,7 +52,7 @@ public:
     void printPiece(void);
 };
 
-class Fil : Tas
+class Fil : public Tas
 {
 public:
     Fil(){};
@@ -53,7 +61,7 @@ public:
     void printPiece(void);
 };
 
-class At : Tas
+class At : public Tas
 {
 public:
     At(){};
@@ -62,7 +70,7 @@ public:
     void printPiece(void);
 };
 
-class Kale : Tas
+class Kale : public Tas
 {
 public:
     Kale(){};
