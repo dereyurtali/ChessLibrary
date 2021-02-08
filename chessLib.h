@@ -84,3 +84,8 @@ public:
 };
 
 void arrayToChess(int, int, struct position);
+
+Tas **board = (Tas **)malloc(8* sizeof(Tas *));
+for(int i = 0; i < 8; i++) {
+    board[i] = (Tas *)malloc(8* sizeof(Tas));
+}

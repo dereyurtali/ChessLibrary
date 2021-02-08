@@ -1,18 +1,10 @@
 #include <iostream>
+
 #include "chessLib.h"
 
 using namespace std;
-int i;
-Tas **board = (Tas **)calloc(8, sizeof(Tas *));
-    for (i = 0; i < 8; i++) {
-        board[i] = (Tas *)calloc(8, sizeof(Tas));
-    }
 
-struct position
-{
-    char dusey;
-    short yatay;
-};
+
 
 void arrayToChess(int i, int j, struct position pos){ //satir 8 - i
     i = 8 - pos.yatay;
@@ -64,3 +56,4 @@ Kale::Kale(struct position p1){
 Piyon::Piyon(struct position p1){
     Piyon piyon1;
     piyon1.setPos(p1); };
+

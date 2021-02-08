@@ -4,6 +4,7 @@
 using namespace std;
 
 int main(){
+    
     struct position pos;
     pos.yatay = 4;
     pos.dusey = 'd';
