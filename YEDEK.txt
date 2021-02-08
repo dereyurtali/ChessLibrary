@@ -252,7 +252,8 @@ struct position *hareketSah(struct position p1){
 
 
 Kontrol etmemiz gerekenler
-Gideceği yer, possible positions arasında mı ? ( possible positions zaten objenin moves isimli array inde tutuluyor. ) 
+Gideceği yer, possible positions arasında mı ? ( possible positions zaten objenin moves isimli array inde tutuluyor. )
+
 
 
 

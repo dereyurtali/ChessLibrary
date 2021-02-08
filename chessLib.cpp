@@ -3,6 +3,14 @@
 
 using namespace std;
 
+void boardToArray(int i, int j, struct position **board){
+    
+}
+void arrayToBoard(int i, int j, struct position **board){
+
+}
+
+
 void printPosArray(struct position *p1)
 {
     int i = 0;
@@ -14,7 +22,14 @@ void printPosArray(struct position *p1)
     cout << endl;
 }
 
-// Tas Class'ı
+// Board tanimlandi
+Tas **board = (Tas **)malloc(8 * sizeof(Tas *));
+    for (i = 0; i < 8; i++) {
+        board[i] = (Tas *)malloc(8 * sizeof(Tas));
+    }
+
+
+// Tas Class'i
 void Tas::setPos(struct position p1) { this->pos = p1; }
 struct position Tas::getPos() { return this->pos; }
 void Tas::setMove(struct position *p1) { this->move = p1; }
@@ -46,9 +61,11 @@ struct position *updateSahMove(struct position p1)
     }
     return possiblePositions;
 }
-// Sah Class'ı
+// Sah Class'i
 Sah::Sah(struct position p1)
 {
+    
+    
     this->setPos(p1);
     this->setMove(updateSahMove(p1));
 };
