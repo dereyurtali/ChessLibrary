@@ -3,14 +3,38 @@
 
 using namespace std;
 
-void boardToArray(int i, int j, struct position pos){
-    i = pos.yatay - i;
-    j = pos.dusey - 'a';
+Tas **createTasArray(int a, int b)
+{
+    // Board tanimlandi
+    Tas **board = (Tas **)malloc(a * sizeof(Tas *));
+    for (int i = 0; i < a; i++)
+    {
+        board[i] = (Tas *)malloc(b * sizeof(Tas));
+    }
+    return board;
 }
-void arrayToBoard(int i, int j, struct position pos){
-    cout << "";
+Tas *createTasArray(int a)
+{
+    // Board tanimlandi
+    Tas *board = (Tas *)malloc(a * sizeof(Tas));
+    return board;
 }
 
+struct ij boardToArray(struct position pos)
+{
+    struct ij rtr;
+    rtr.i = 8 - pos.yatay;
+    rtr.j = pos.dusey - 'a';
+    return rtr;
+}
+
+struct position arrayToBoard(struct ij inputIJ)
+{
+    struct position pos;
+    pos.dusey = inputIJ.j + 'a';
+    pos.yatay = 8 - inputIJ.i;
+    return pos;
+}
 
 void printPosArray(struct position *p1)
 {
@@ -23,19 +47,18 @@ void printPosArray(struct position *p1)
     cout << endl;
 }
 
-
-
 // Tas Class'i
 void Tas::setPos(struct position p1) { this->pos = p1; }
 struct position Tas::getPos() { return this->pos; }
 void Tas::setMove(struct position *p1) { this->move = p1; }
 struct position *Tas::getMove() { return this->move; }
+void Tas::setTasTuru(string s1){ this->tasTuru = s1; }
+string Tas::getTasTuru(){ return this->tasTuru; }
+    
 Tas::Tas(struct position p1)
 {
     this->setPos(p1);
 };
-
-
 
 // --------------- SAH -----------------
 struct position *updateSahMove(struct position p1)
@@ -60,22 +83,18 @@ struct position *updateSahMove(struct position p1)
 // Sah Class'i
 Sah::Sah(struct position p1)
 {
-    
-    
+    this->setTasTuru("Sah");
     this->setPos(p1);
     this->setMove(updateSahMove(p1));
 };
 void Sah::printPiece()
 {
-    cout << "Type: Sah" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- SAH -----------------
-
-
-
 
 // --------------- VEZIR -----------------
 struct position *updateVezirMove(struct position p1)
@@ -122,24 +141,25 @@ struct position *updateVezirMove(struct position p1)
             }
         }
     }
+    return possiblePositions;
 }
 // Vezir Class'ı
 Vezir::Vezir(struct position p1)
 {
+    this->setTasTuru("Vezir");
     this->setPos(p1);
     this->setMove(updateVezirMove(p1));
 };
 void Vezir::printPiece()
 {
-    cout << "Type: Vezir" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- VEZIR -----------------
 
-
-
+//
 
 // --------------- FIL -----------------
 struct position *updateFilMove(struct position p1)
@@ -168,25 +188,25 @@ struct position *updateFilMove(struct position p1)
             }
         }
     }
+    return possiblePositions;
 }
 // Fil Class'ı
 Fil::Fil(struct position p1)
 {
-
+    this->setTasTuru("Fil");
     this->setPos(p1);
     this->setMove(updateFilMove(p1));
 };
 void Fil::printPiece()
 {
-    cout << "Type: Fil" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- FIL -----------------
 
-
-
+//
 
 // --------------- AT -----------------
 struct position *updateAtMove(struct position p1)
@@ -215,25 +235,25 @@ struct position *updateAtMove(struct position p1)
             }
         }
     }
+    return possiblePositions;
 }
 // At Class'ı
 At::At(struct position p1)
 {
+    this->setTasTuru("At");
     this->setPos(p1);
     this->setMove(updateAtMove(p1));
 };
 void At::printPiece()
 {
-    cout << "Type: At" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- AT -----------------
 
-
-
-
+//
 
 // --------------- KALE -----------------
 struct position *updateKaleMove(struct position p1)
@@ -256,25 +276,25 @@ struct position *updateKaleMove(struct position p1)
             }
         }
     }
+    return possiblePositions;
 }
 // Kale Class'ı
 Kale::Kale(struct position p1)
 {
+    this->setTasTuru("Kale");
     this->setPos(p1);
     this->setMove(updateKaleMove(p1));
 };
 void Kale::printPiece()
 {
-    cout << "Type: Kale" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- KALE -----------------
 
-
-
-
+//
 
 // --------------- PIYON -----------------
 struct position *updatePiyonMove(struct position p1)
@@ -301,25 +321,25 @@ struct position *updatePiyonMove(struct position p1)
         foo[0] = newPos;
         possiblePositions = foo;
     }
+    return possiblePositions;
 }
 // Piyon Class'ı
 Piyon::Piyon(struct position p1)
 {
+    this->setTasTuru("Piyon");
     this->setPos(p1);
     this->setMove(updatePiyonMove(p1));
 };
 void Piyon::printPiece()
 {
-    cout << "Type: Piyon" << endl
+    cout << "Type: " << this->getTasTuru() << endl
          << "Current Pos: " << this->getPos().dusey << this->getPos().yatay << endl
          << "Possible Moves: ";
     printPosArray(this->getMove());
 }
 // --------------- PIYON -----------------
 
-
-
-
+//
 void movePiece(Tas *t, struct position newPos)
 {
     struct position *possibleMoves = t->getMove();
@@ -337,7 +357,38 @@ void movePiece(Tas *t, struct position newPos)
     { //tasi
         t->setPos(newPos);
         free(t->getMove());
-        updateSahMove(newPos);
+        if ( !(t->getTasTuru().compare("At")) ){ updateAtMove(newPos); }
+        else if ( !(t->getTasTuru().compare("Vezir")) ){ updateVezirMove(newPos); }
+        else if ( !(t->getTasTuru().compare("Piyon")) ){ updateAtMove(newPos); }
+        else if ( !(t->getTasTuru().compare("Sah")) ){ updateSahMove(newPos); }
+        else if ( !(t->getTasTuru().compare("Kale")) ){ updateKaleMove(newPos); }
+        else if ( !(t->getTasTuru().compare("Fil")) ){ updateFilMove(newPos); }
+        /*
+        switch (t->getTasTuru())
+        {
+        case "At":
+            updateAtMove(newPos);
+            break;
+        case "Vezir":
+            updateVezirMove(newPos);
+            break;
+        case "Piyon":
+            updateAtMove(newPos);
+            break;
+        case "Sah":
+            updateAtMove(newPos);
+            break;
+        case "Kale":
+            updateAtMove(newPos);
+            break;
+        case "Fil":
+            updateAtMove(newPos);
+            break;
+        default:
+            cout << "Tas turu hatali." << endl;
+            break;
+        }
+        */
     }
     else
     {

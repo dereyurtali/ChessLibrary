@@ -2,9 +2,17 @@
 
 #define CHESSLIB_HPP_
 
+using namespace std;
+
 void printPosArray(struct position *);
-void boardToArray(int, int, struct position);
-void arrayToBoard(int, int, struct position);
+struct ij boardToArray(struct position);
+struct position arrayToBoard(struct ij);
+
+struct ij
+{
+    short i;
+    short j;
+};
 
 struct position
 {
@@ -19,12 +27,12 @@ struct position *updateAtMove(struct position);
 struct position *updateKaleMove(struct position);
 struct position *updatePiyonMove(struct position);
 
-
 class Tas
 {
 private:
     struct position pos;
     struct position *move;
+    string tasTuru;
 
 public:
     Tas(){};
@@ -34,9 +42,12 @@ public:
     struct position getPos();
     void setMove(struct position *);
     struct position *getMove();
+    void setTasTuru(string);
+    string getTasTuru();
     friend void movePiece(Tas *, struct position);
+    //friend Tas **createTasArray(int, int);
+    //friend Tas *createTasArray(int);
 };
-
 
 class Sah : public Tas
 {
@@ -45,10 +56,7 @@ public:
     Sah(struct position);
     ~Sah(){};
     void printPiece(void);
-    
-
 };
-
 
 class Vezir : public Tas
 {
@@ -94,4 +102,5 @@ public:
     ~Piyon(){};
     void printPiece(void);
 };
-
+Tas **createTasArray(int, int);
+Tas *createTasArray(int);

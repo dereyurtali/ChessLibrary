@@ -4,22 +4,10 @@
 using namespace std;
 
 int main(){
-    struct position positionOne;
-    positionOne.yatay = 4;
-    positionOne.dusey = 'd';
-    struct position positionTwo;
-    positionTwo.yatay = 5;
-    positionTwo.dusey = 'd';
-    Piyon piyon1(positionOne);
-    Kale kale1(positionOne);
-    At at1(positionOne);
-    Sah sah1(positionOne);
-    //piyon1.printPiece();
-    sah1.printPiece();
-    movePiece(&sah1, positionTwo);
-    sah1.printPiece();
+    Tas **board = createTasArray(8,8);
+    Tas *black = createTasArray(16);
+    Tas *white = createTasArray(16);
+    
 
-    int i = 0, j = 0;
-    boardToArray(i, j, positionOne);
     return 0;
 }
