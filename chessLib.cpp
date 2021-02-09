@@ -3,11 +3,12 @@
 
 using namespace std;
 
-void boardToArray(int i, int j, struct position **board){
-    
+void boardToArray(int i, int j, struct position pos){
+    i = pos.yatay - i;
+    j = pos.dusey - 'a';
 }
-void arrayToBoard(int i, int j, struct position **board){
-
+void arrayToBoard(int i, int j, struct position pos){
+    cout << "";
 }
 
 
@@ -22,11 +23,6 @@ void printPosArray(struct position *p1)
     cout << endl;
 }
 
-// Board tanimlandi
-Tas **board = (Tas **)malloc(8 * sizeof(Tas *));
-    for (i = 0; i < 8; i++) {
-        board[i] = (Tas *)malloc(8 * sizeof(Tas));
-    }
 
 
 // Tas Class'i

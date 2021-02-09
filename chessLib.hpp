@@ -3,8 +3,8 @@
 #define CHESSLIB_HPP_
 
 void printPosArray(struct position *);
-void boardToArray(int, int, struct position **);
-void arrayToBoard(int, int, struct position **);
+void boardToArray(int, int, struct position);
+void arrayToBoard(int, int, struct position);
 
 struct position
 {

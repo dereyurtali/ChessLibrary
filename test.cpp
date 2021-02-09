@@ -18,5 +18,8 @@ int main(){
     sah1.printPiece();
     movePiece(&sah1, positionTwo);
     sah1.printPiece();
+
+    int i = 0, j = 0;
+    boardToArray(i, j, positionOne);
     return 0;
 }
